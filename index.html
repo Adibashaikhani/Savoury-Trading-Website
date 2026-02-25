@@ -408,8 +408,11 @@
 }
 
 /* Hide hamburger on desktop */
-.nav-toggle {
-  display: none;
+/* Hide hamburger ONLY on desktop */
+@media (min-width: 769px) {
+  .nav-toggle {
+    display: none;
+  }
 }
 </style>
 </head>
