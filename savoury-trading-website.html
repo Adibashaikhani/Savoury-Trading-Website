@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Savoria Trading Co. | Premium Savoury Products</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #1A4FBF;
+    --blue-light: #2563EB;
+    --blue-dark: #0F2D6B;
+    --blue-pale: #EFF6FF;
+    --blue-mid: #DBEAFE;
+    --white: #FFFFFF;
+    --off-white: #F8FAFF;
+    --text-dark: #0F172A;
+    --text-mid: #1E3A6E;
+    --text-muted: #64748B;
+    --border: rgba(26,79,191,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--white);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 0 60px; height: 80px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(255,255,255,0.97);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 2px 20px rgba(26,79,191,0.06);
+    transition: box-shadow 0.3s;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700;
+    color: var(--blue); letter-spacing: 2px; text-decoration: none;
+  }
+  .nav-logo span { color: var(--text-dark); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: var(--text-mid); text-decoration: none; font-size: 0.72rem;
+    font-weight: 600; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--blue); }
+  .nav-cta { background: var(--blue); color: var(--white) !important; padding: 10px 22px; font-weight: 700 !important; }
+  .nav-cta:hover { background: var(--blue-dark) !important; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh; position: relative;
+    display: flex; align-items: center;
+    padding: 120px 60px 60px; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 85% at 72% 50%, rgba(26,79,191,0.08) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 50% at 10% 85%, rgba(37,99,235,0.05) 0%, transparent 60%),
+      linear-gradient(150deg, #FFFFFF 0%, #F0F6FF 100%);
+  }
+  .hero-grid-overlay {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(26,79,191,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(26,79,191,0.05) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+  .hero-shape {
+    position: absolute; right: 5%; top: 12%; width: 460px; height: 460px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,79,191,0.09) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 700px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    border: 1px solid rgba(26,79,191,0.3); background: rgba(26,79,191,0.05);
+    padding: 8px 18px; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--blue); margin-bottom: 30px; animation: fadeUp 0.8s ease both;
+  }
+  .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--blue); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+  .hero-title {
+    font-family: 'Playfair Display', serif; font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 900; color: var(--text-dark); line-height: 1.05;
+    margin-bottom: 24px; animation: fadeUp 0.8s 0.2s ease both;
+  }
+  .hero-title .accent { color: var(--blue); display: block; }
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.25rem;
+    color: var(--text-muted); font-weight: 400; line-height: 1.7;
+    max-width: 520px; margin-bottom: 44px; animation: fadeUp 0.8s 0.35s ease both;
+  }
+  .hero-btns { display: flex; gap: 18px; animation: fadeUp 0.8s 0.5s ease both; }
+  .btn-primary {
+    background: var(--blue); color: var(--white); padding: 16px 36px;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    text-decoration: none; transition: background 0.3s;
+  }
+  .btn-primary:hover { background: var(--blue-dark); }
+  .btn-secondary {
+    border: 2px solid var(--blue); color: var(--blue); padding: 16px 36px;
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    text-decoration: none; transition: all 0.3s;
+  }
+  .btn-secondary:hover { background: var(--blue); color: var(--white); }
+  .hero-stats {
+    position: absolute; right: 60px; bottom: 80px; display: flex; gap: 48px;
+    animation: fadeUp 0.8s 0.6s ease both;
+  }
+  .stat-item { text-align: right; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--blue); line-height: 1; }
+  .stat-label { font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-top: 4px; }
+  .hero-line {
+    position: absolute; right: 0; top: 0; bottom: 0; width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--blue), transparent); opacity: 0.2;
+  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* SECTIONS */
+  section { padding: 100px 60px; }
+  .section-label {
+    font-size: 0.62rem; letter-spacing: 4px; text-transform: uppercase; color: var(--blue);
+    margin-bottom: 14px; display: flex; align-items: center; gap: 14px;
+  }
+  .section-label::before { content: ''; width: 30px; height: 2px; background: var(--blue); }
+  .section-title {
+    font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700; color: var(--text-dark); line-height: 1.15; margin-bottom: 20px;
+  }
+  .section-divider {
+    width: 60px; height: 3px; border-radius: 2px;
+    background: linear-gradient(to right, var(--blue), var(--blue-light)); margin-bottom: 50px;
+  }
+
+  /* ABOUT */
+  #about { background: var(--blue-pale); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .about-image-block { position: relative; height: 520px; }
+  .about-img-main {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--blue-mid), rgba(26,79,191,0.1));
+    border: 1px solid rgba(26,79,191,0.2);
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .about-img-main::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(26,79,191,0.04) 20px, rgba(26,79,191,0.04) 21px);
+  }
+  .about-img-icon { font-size: 6rem; opacity: 0.2; }
+  .about-badge-float {
+    position: absolute; bottom: -20px; right: -20px;
+    background: var(--blue); color: var(--white);
+    padding: 24px 28px; text-align: center;
+    box-shadow: 0 10px 40px rgba(26,79,191,0.3);
+  }
+  .about-badge-float .num { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 900; line-height: 1; }
+  .about-badge-float .txt { font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
+  .about-text p { font-family: 'Cormorant Garamond', serif; font-size: 1.12rem; color: var(--text-muted); line-height: 1.85; margin-bottom: 20px; }
+  .about-pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 36px; }
+  .pillar { border: 1px solid rgba(26,79,191,0.15); background: var(--white); padding: 20px; transition: all 0.3s; }
+  .pillar:hover { border-color: var(--blue); box-shadow: 0 4px 20px rgba(26,79,191,0.1); }
+  .pillar-icon { font-size: 1.4rem; margin-bottom: 8px; }
+  .pillar h4 { font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 6px; }
+  .pillar p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* TRADING */
+  #trading { background: var(--white); }
+  .trading-intro { max-width: 650px; margin-bottom: 64px; }
+  .trading-intro p { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--text-muted); line-height: 1.8; }
+  .trading-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 48px; }
+  .trading-card {
+    background: var(--off-white); border: 1px solid var(--border); padding: 40px 32px;
+    border-top: 3px solid transparent; transition: all 0.3s;
+  }
+  .trading-card:hover { border-top-color: var(--blue); box-shadow: 0 8px 40px rgba(26,79,191,0.1); transform: translateY(-4px); }
+  .tc-num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: rgba(26,79,191,0.08); line-height: 1; margin-bottom: 16px; }
+  .tc-icon { font-size: 1.8rem; margin-bottom: 14px; }
+  .tc-title { font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
+  .tc-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
+  .trading-process { background: var(--blue); padding: 48px; }
+  .process-title { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 36px; }
+  .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); position: relative; }
+  .process-steps::before {
+    content: ''; position: absolute; top: 24px; left: 12%; right: 12%; height: 1px;
+    background: rgba(255,255,255,0.3); z-index: 0;
+  }
+  .process-step { text-align: center; position: relative; z-index: 1; }
+  .step-dot {
+    width: 48px; height: 48px; border: 2px solid rgba(255,255,255,0.5); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;
+    background: var(--blue); font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--white);
+  }
+  .step-name { font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.85); }
+
+  /* PRODUCTS */
+  #products { background: var(--blue-pale); }
+  .products-tabs { display: flex; gap: 4px; margin-bottom: 48px; border-bottom: 2px solid var(--blue-mid); }
+  .tab-btn {
+    background: none; border: none; cursor: pointer; font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted);
+    padding: 12px 24px; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.3s;
+  }
+  .tab-btn.active { color: var(--blue); border-bottom-color: var(--blue); font-weight: 700; }
+  .tab-btn:hover { color: var(--blue); }
+  .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .product-card { background: var(--white); border: 1px solid var(--border); overflow: hidden; transition: all 0.3s; cursor: pointer; }
+  .product-card:hover { border-color: var(--blue); transform: translateY(-6px); box-shadow: 0 20px 60px rgba(26,79,191,0.15); }
+  .product-img {
+    height: 200px; background: linear-gradient(135deg, var(--blue-mid), var(--blue-pale));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3.5rem; position: relative; overflow: hidden;
+  }
+  .product-img::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(-45deg, transparent, transparent 15px, rgba(26,79,191,0.04) 15px, rgba(26,79,191,0.04) 16px);
+  }
+  .product-tag { position: absolute; top: 14px; right: 14px; background: var(--blue); color: var(--white); font-size: 0.55rem; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; font-weight: 700; }
+  .product-body { padding: 24px; }
+  .product-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 600; color: var(--text-dark); margin-bottom: 8px; }
+  .product-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px; }
+  .product-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 1px solid var(--border); }
+  .product-origin { font-size: 0.62rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); }
+  .product-link { font-size: 0.65rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue); text-decoration: none; font-weight: 600; }
+  .product-link:hover { text-decoration: underline; }
+
+  /* CLIENTELE */
+  #clientele { background: var(--white); }
+  .clients-intro { max-width: 600px; margin-bottom: 60px; }
+  .clients-intro p { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--text-muted); line-height: 1.8; }
+  .clients-logos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 64px; }
+  .client-logo {
+    background: var(--off-white); border: 1px solid var(--border);
+    padding: 36px 28px; display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 10px; text-align: center; transition: all 0.3s;
+  }
+  .client-logo:hover { border-color: var(--blue); background: var(--blue-pale); box-shadow: 0 4px 20px rgba(26,79,191,0.1); }
+  .client-icon { font-size: 2rem; }
+  .client-name { font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); }
+  .testimonials { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .testimonial { background: var(--blue-pale); padding: 40px; border-left: 4px solid var(--blue); position: relative; }
+  .testimonial::before { content: '"'; font-family: 'Playfair Display', serif; font-size: 6rem; color: rgba(26,79,191,0.1); position: absolute; top: 10px; left: 24px; line-height: 1; }
+  .testimonial p { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--text-mid); line-height: 1.8; margin-bottom: 24px; position: relative; z-index: 1; }
+  .testimonial-author { display: flex; align-items: center; gap: 14px; }
+  .author-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--blue-dark), var(--blue)); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--white); font-weight: 700; }
+  .author-name { font-size: 0.8rem; font-weight: 600; color: var(--text-dark); }
+  .author-role { font-size: 0.65rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); }
+
+  /* CONTACT */
+  #contact { background: var(--blue-pale); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+  .contact-info p { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 40px; }
+  .contact-details { display: flex; flex-direction: column; gap: 20px; }
+  .contact-item { display: flex; align-items: flex-start; gap: 16px; }
+  .contact-icon { width: 40px; height: 40px; flex-shrink: 0; border: 1px solid rgba(26,79,191,0.25); background: var(--white); display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+  .contact-item-text h4 { font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); margin-bottom: 4px; }
+  .contact-item-text p { font-size: 0.85rem; color: var(--text-mid); margin: 0; }
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-field { display: flex; flex-direction: column; gap: 8px; }
+  .form-field label { font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); font-weight: 600; }
+  .form-field input, .form-field textarea, .form-field select { background: var(--white); border: 1px solid rgba(26,79,191,0.2); color: var(--text-dark); padding: 14px 16px; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; outline: none; transition: border-color 0.3s; }
+  .form-field input:focus, .form-field textarea:focus, .form-field select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(26,79,191,0.08); }
+  .form-field textarea { height: 120px; resize: vertical; }
+  .form-submit { background: var(--blue); color: var(--white); border: none; padding: 16px 40px; font-family: 'Montserrat', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: background 0.3s; align-self: flex-start; }
+  .form-submit:hover { background: var(--blue-dark); }
+
+  /* FOOTER */
+  footer { background: var(--blue-dark); color: rgba(255,255,255,0.8); padding: 60px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+  .footer-brand .nav-logo { display: block; margin-bottom: 16px; color: var(--white) !important; }
+  .footer-brand .nav-logo span { color: rgba(255,255,255,0.55) !important; }
+  .footer-brand p { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
+  .footer-col h4 { font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 20px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul a { font-size: 0.82rem; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.3s; }
+  .footer-col ul a:hover { color: var(--white); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-bottom p { font-size: 0.72rem; color: rgba(255,255,255,0.35); }
+  .footer-cert { display: flex; gap: 20px; }
+  .cert-badge { font-size: 0.62rem; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.2); padding: 4px 10px; }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(40px); transition: all 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">SAVORIA<span> TRADING CO.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">Company Profile</a></li>
+    <li><a href="#trading">Trading Unit</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#clientele">Clientele</a></li>
+    <li><a href="#contact" class="nav-cta">Enquire Now</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-overlay"></div>
+  <div class="hero-shape"></div>
+  <div class="hero-line"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Established 2008 · Premium Trading</div>
+    <h1 class="hero-title">The Art of<br><span class="accent">Savoury Excellence</span></h1>
+    <p class="hero-sub">Sourcing, distributing and trading the world's finest savoury products — from artisan snacks to premium condiments — across global markets with uncompromising quality standards.</p>
+    <div class="hero-btns">
+      <a href="#products" class="btn-primary">Explore Products</a>
+      <a href="#about" class="btn-secondary">Our Story</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item"><div class="stat-num">250+</div><div class="stat-label">SKUs Traded</div></div>
+    <div class="stat-item"><div class="stat-num">18</div><div class="stat-label">Countries</div></div>
+    <div class="stat-item"><div class="stat-num">16yr</div><div class="stat-label">Industry Trust</div></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-grid">
+    <div class="about-image-block reveal">
+      <div class="about-img-main"><div class="about-img-icon">🫒</div></div>
+      <div class="about-badge-float"><div class="num">A+</div><div class="txt">Quality Rated</div></div>
+    </div>
+    <div class="about-text reveal">
+      <div class="section-label">Company Profile</div>
+      <h2 class="section-title">Built on Integrity,<br>Driven by Flavour</h2>
+      <div class="section-divider"></div>
+      <p>Savoria Trading Co. is a leading specialist in the procurement, distribution, and wholesale trading of premium savoury food products. Founded in 2008, we have grown into a trusted partner for retailers, foodservice operators, and hospitality groups across Southern Africa and beyond.</p>
+      <p>Our deep-rooted supplier relationships and rigorous quality assurance protocols ensure that every product we place carries our reputation — one built with care over sixteen years of dedicated industry service.</p>
+      <div class="about-pillars">
+        <div class="pillar"><div class="pillar-icon">🌍</div><h4>Global Sourcing</h4><p>Direct relationships with producers across 18 countries ensuring premium quality.</p></div>
+        <div class="pillar"><div class="pillar-icon">🏆</div><h4>Quality Assured</h4><p>Every product undergoes strict QA checks before entering our supply chain.</p></div>
+        <div class="pillar"><div class="pillar-icon">🤝</div><h4>Trusted Partners</h4><p>Long-term relationships with retailers, hotels, and food service chains.</p></div>
+        <div class="pillar"><div class="pillar-icon">⚡</div><h4>Agile Logistics</h4><p>Flexible delivery solutions tailored to client volume and schedule requirements.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="trading">
+  <div class="trading-intro reveal">
+    <div class="section-label">Trading Unit</div>
+    <h2 class="section-title">How We Trade</h2>
+    <div class="section-divider"></div>
+    <p>Our dedicated trading unit operates as a full-spectrum procurement and distribution engine. From identifying emerging product categories to negotiating favourable terms and executing last-mile delivery, we handle the complete value chain so our clients don't have to.</p>
+  </div>
+  <div class="trading-grid reveal">
+    <div class="trading-card"><div class="tc-num">01</div><div class="tc-icon">🔍</div><div class="tc-title">Product Sourcing</div><p class="tc-desc">We identify and vet premium savoury products from manufacturers and artisan producers worldwide, ensuring alignment with market demands and client specifications.</p></div>
+    <div class="trading-card"><div class="tc-num">02</div><div class="tc-icon">📦</div><div class="tc-title">Import & Clearance</div><p class="tc-desc">Our experienced logistics team manages all import documentation, customs clearance, and regulatory compliance to ensure seamless product entry.</p></div>
+    <div class="trading-card"><div class="tc-num">03</div><div class="tc-icon">🏭</div><div class="tc-title">Warehousing</div><p class="tc-desc">Temperature-controlled, HACCP-compliant warehousing facilities ensuring product integrity from arrival through to dispatch.</p></div>
+    <div class="trading-card"><div class="tc-num">04</div><div class="tc-icon">🚚</div><div class="tc-title">Wholesale Distribution</div><p class="tc-desc">Flexible minimum order quantities and scheduled delivery routes covering retail chains, independents, and foodservice nationally.</p></div>
+    <div class="trading-card"><div class="tc-num">05</div><div class="tc-icon">📊</div><div class="tc-title">Category Management</div><p class="tc-desc">We support retailers with planogram consultation, range rationalisation, and seasonal promotional planning to maximise category performance.</p></div>
+    <div class="trading-card"><div class="tc-num">06</div><div class="tc-icon">🌿</div><div class="tc-title">Private Label</div><p class="tc-desc">Tailored private label solutions available for select product lines, enabling clients to build proprietary savoury ranges with our supplier network.</p></div>
+  </div>
+  <div class="trading-process reveal">
+    <div class="process-title">Our Trade Cycle</div>
+    <div class="process-steps">
+      <div class="process-step"><div class="step-dot">1</div><div class="step-name">Source</div></div>
+      <div class="process-step"><div class="step-dot">2</div><div class="step-name">Import</div></div>
+      <div class="process-step"><div class="step-dot">3</div><div class="step-name">Store</div></div>
+      <div class="process-step"><div class="step-dot">4</div><div class="step-name">Deliver</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="products">
+  <div class="reveal">
+    <div class="section-label">Product Portfolio</div>
+    <h2 class="section-title">Our Product Range</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="products-tabs reveal">
+    <button class="tab-btn active" onclick="filterProducts('all',event)">All Products</button>
+    <button class="tab-btn" onclick="filterProducts('snacks',event)">Premium Snacks</button>
+    <button class="tab-btn" onclick="filterProducts('condiments',event)">Condiments & Sauces</button>
+    <button class="tab-btn" onclick="filterProducts('cured',event)">Cured & Deli</button>
+    <button class="tab-btn" onclick="filterProducts('pantry',event)">Pantry Staples</button>
+  </div>
+  <div class="products-grid reveal" id="productsGrid">
+    <div class="product-card" data-cat="snacks"><div class="product-img">🧀<span class="product-tag">Bestseller</span></div><div class="product-body"><div class="product-name">Aged Parmesan Crisps</div><div class="product-desc">Slow-baked artisan cheese crisps made with 24-month aged Parmigiano Reggiano. Gluten-free, keto-friendly.</div><div class="product-footer"><span class="product-origin">Origin: Italy</span><a href="#contact" class="product-link">Enquire →</a></div></div></div>
+    <div class="product-card" data-cat="condiments"><div class="product-img">🫙<span class="product-tag">New In</span></div><div class="product-body"><div class="product-name">Truffle Aioli Collection</div><div class="product-desc">A curated range of premium truffle-infused aiolis — black, white, and summer truffle varieties in retail-ready packaging.</div><div class="product-footer"><span class="product-origin">Origin: France</span><a href="#contact" class="product-link">Enquire →</a></div></div></div>
+    <div class="product-card" data-cat="cured"><div class="product-img">🥩</div><div class="product-body"><div class="product-name">Ibérico Sliced Charcuterie</div><div class="product-desc">Hand-sliced Iberian cured meats from free-range acorn-fed pigs. Individually sealed for extended shelf life.</div><div class="product-footer"><span class="product-origin">Origin: Spain</span><a href="#contact" class="product-link">Enquire →</a></div></div></div>
+    <div class="product-card" data-cat="pantry"><div class="product-img">🫒<span class="product-tag">Premium</span></div><div class="product-body"><div class="product-name">Extra Virgin Olive Oil Selection</div><div class="product-desc">Cold-pressed single-origin EVOO from award-winning groves. Available in 250ml, 500ml, and 5L catering formats.</div><div class="product-footer"><span class="product-origin">Origin: Greece / Spain</span><a href="#contact" class="product-link">Enquire →</a></div></div></div>
+    <div class="product-card" data-cat="snacks"><div class="product-img">🌶️</div><div class="product-body"><div class="product-name">Smoked Chilli Nut Mixes</div><div class="product-desc">Artisan-roasted nut blends with real smoked chipotle and sea salt. Available in individual serve and bulk retail formats.</div><div class="product-footer"><span class="product-origin">Origin: South Africa</span><a href="#contact" class="product-link">Enquire →</a></div></div></div>
+    <div class="product-card" data-cat="condiments"><div class="product-img">🍯</div><div class="product-body"><div class="product-name">Artisan Mustard Range</div><div class="product-desc">Stone-ground wholegrain and Dijon mustards with herb and honey variants. Award-winning at International Taste Awards 2023.</div><div class="product-footer"><span class="product-origin">Origin: Belgium</span><a href="#contact" class="product-link">Enquire →</a></div></div></div>
+  </div>
+</section>
+
+<section id="clientele">
+  <div class="clients-intro reveal">
+    <div class="section-label">Our Clientele</div>
+    <h2 class="section-title">Trusted by Industry Leaders</h2>
+    <div class="section-divider"></div>
+    <p>From national retail chains and boutique delicatessens to five-star hospitality groups and corporate food service operators, Savoria Trading Co. proudly serves a diverse portfolio of clients who share our commitment to quality.</p>
+  </div>
+  <div class="clients-logos reveal">
+    <div class="client-logo"><div class="client-icon">🏨</div><div class="client-name">Prestige Hotels Group</div></div>
+    <div class="client-logo"><div class="client-icon">🛒</div><div class="client-name">National Retail Chain</div></div>
+    <div class="client-logo"><div class="client-icon">✈️</div><div class="client-name">Airline Catering Co.</div></div>
+    <div class="client-logo"><div class="client-icon">🍽️</div><div class="client-name">Restaurant Group SA</div></div>
+    <div class="client-logo"><div class="client-icon">🏪</div><div class="client-name">Fine Food Delis</div></div>
+    <div class="client-logo"><div class="client-icon">🏢</div><div class="client-name">Corporate Catering Ltd</div></div>
+    <div class="client-logo"><div class="client-icon">🎓</div><div class="client-name">Institutional Buyers</div></div>
+    <div class="client-logo"><div class="client-icon">🛳️</div><div class="client-name">Cruise Line Partners</div></div>
+  </div>
+  <div class="testimonials reveal">
+    <div class="testimonial">
+      <p>Savoria has been an invaluable partner to our procurement team. Their product knowledge is second to none and they consistently deliver on quality, timing, and price — exactly what a volume buyer needs from a trading partner.</p>
+      <div class="testimonial-author"><div class="author-avatar">MK</div><div><div class="author-name">Michael Khumalo</div><div class="author-role">Head of Procurement · National Retail Group</div></div></div>
+    </div>
+    <div class="testimonial">
+      <p>We've sourced our entire savoury charcuterie and condiment range through Savoria for three years. Their private label capability helped us launch our in-house deli brand — a game-changer for our margins and customer perception.</p>
+      <div class="testimonial-author"><div class="author-avatar">SR</div><div><div class="author-name">Sophie Rousseau</div><div class="author-role">F&B Director · Prestige Hotels Group</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-grid">
+    <div class="reveal">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="section-title">Start a Conversation</h2>
+      <div class="section-divider"></div>
+      <div class="contact-info"><p>Whether you're a retailer looking to expand your savoury range, a hospitality operator seeking a reliable supply partner, or a brand looking to break into new markets — we would love to hear from you.</p></div>
+      <div class="contact-details">
+        <div class="contact-item"><div class="contact-icon">📍</div><div class="contact-item-text"><h4>Head Office</h4><p>14 Commerce Park, Century City, Cape Town, 7441</p></div></div>
+        <div class="contact-item"><div class="contact-icon">📞</div><div class="contact-item-text"><h4>Trading Desk</h4><p>+27 21 555 0100</p></div></div>
+        <div class="contact-item"><div class="contact-icon">✉️</div><div class="contact-item-text"><h4>Email</h4><p>trade@savoria.co.za</p></div></div>
+        <div class="contact-item"><div class="contact-icon">🕐</div><div class="contact-item-text"><h4>Trading Hours</h4><p>Monday – Friday: 08:00 – 17:00</p></div></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-field"><label>First Name</label><input type="text" placeholder="John"></div>
+          <div class="form-field"><label>Last Name</label><input type="text" placeholder="Smith"></div>
+        </div>
+        <div class="form-field"><label>Company Name</label><input type="text" placeholder="Your Company Pty Ltd"></div>
+        <div class="form-field"><label>Email Address</label><input type="email" placeholder="john@company.co.za"></div>
+        <div class="form-field"><label>Enquiry Type</label><select><option>Wholesale / Distribution</option><option>Product Sourcing</option><option>Private Label</option><option>Import Partnership</option><option>General Enquiry</option></select></div>
+        <div class="form-field"><label>Message</label><textarea placeholder="Tell us about your business and what you're looking for…"></textarea></div>
+        <button class="form-submit" type="submit">Send Enquiry →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">SAVORIA<span> TRADING CO.</span></a>
+      <p>Premium savoury product trading, sourcing, and distribution since 2008. Building lasting partnerships through quality and integrity.</p>
+    </div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="#about">Company Profile</a></li><li><a href="#trading">Trading Unit</a></li><li><a href="#clientele">Our Clients</a></li><li><a href="#contact">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Products</h4><ul><li><a href="#products">Premium Snacks</a></li><li><a href="#products">Condiments</a></li><li><a href="#products">Cured & Deli</a></li><li><a href="#products">Pantry Range</a></li></ul></div>
+    <div class="footer-col"><h4>Trade</h4><ul><li><a href="#trading">Wholesale</a></li><li><a href="#trading">Import Services</a></li><li><a href="#trading">Private Label</a></li><li><a href="#contact">Become a Client</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Savoria Trading Co. All rights reserved.</p>
+    <div class="footer-cert"><span class="cert-badge">HACCP Certified</span><span class="cert-badge">ISO 22000</span><span class="cert-badge">FSSC Compliant</span></div>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  function filterProducts(cat, event) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    document.querySelectorAll('.product-card').forEach(c => {
+      c.style.display = (cat === 'all' || c.dataset.cat === cat) ? 'block' : 'none';
+    });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-submit');
+    btn.textContent = '✓ Enquiry Sent!';
+    btn.style.background = '#16a34a';
+    setTimeout(() => { btn.textContent = 'Send Enquiry →'; btn.style.background = ''; }, 3000);
+  }
+
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').style.boxShadow = window.scrollY > 50
+      ? '0 4px 30px rgba(26,79,191,0.14)' : '0 2px 20px rgba(26,79,191,0.06)';
+  });
+</script>
+</body>
+</html>
