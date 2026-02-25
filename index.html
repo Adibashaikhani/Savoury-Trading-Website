@@ -293,6 +293,124 @@
   /* REVEAL */
   .reveal { opacity: 0; transform: translateY(40px); transition: all 0.7s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ================= MOBILE RESPONSIVE ================= */
+@media (max-width: 1024px) {
+  nav { padding: 0 24px; }
+  section { padding: 80px 24px; }
+}
+
+@media (max-width: 768px) {
+
+  /* NAV */
+  nav {
+    height: 70px;
+  }
+  .nav-links {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: white;
+    flex-direction: column;
+    gap: 0;
+    padding: 24px;
+    display: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-links li {
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+  .nav-links.show {
+    display: flex;
+  }
+
+  .nav-toggle {
+    display: block;
+    font-size: 1.4rem;
+    cursor: pointer;
+  }
+
+  /* HERO */
+  #hero {
+    padding: 120px 24px 60px;
+  }
+  .hero-stats {
+    position: static;
+    margin-top: 40px;
+    justify-content: space-between;
+  }
+  .stat-item {
+    text-align: center;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .about-image-block {
+    height: 360px;
+  }
+  .about-pillars {
+    grid-template-columns: 1fr;
+  }
+
+  /* TRADING */
+  .trading-grid {
+    grid-template-columns: 1fr;
+  }
+  .process-steps {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .process-steps::before {
+    display: none;
+  }
+
+  /* PRODUCTS */
+  .products-tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* CLIENTS */
+  .clients-logos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .testimonials {
+    grid-template-columns: 1fr;
+  }
+
+  /* CONTACT */
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* FOOTER */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+}
+
+/* Hide hamburger on desktop */
+.nav-toggle {
+  display: none;
+}
 </style>
 </head>
 <body>
@@ -306,6 +424,7 @@
     <li><a href="#clientele">Clientele</a></li>
     <li><a href="#contact" class="nav-cta">Enquire Now</a></li>
   </ul>
+  <div class="nav-toggle" onclick="toggleNav()">☰</div>
 </nav>
 
 <section id="hero">
@@ -502,6 +621,10 @@
     document.querySelector('nav').style.boxShadow = window.scrollY > 50
       ? '0 4px 30px rgba(26,79,191,0.14)' : '0 2px 20px rgba(26,79,191,0.06)';
   });
+
+  function toggleNav() {
+  document.querySelector('.nav-links').classList.toggle('show');
+}
 </script>
 </body>
 </html>
